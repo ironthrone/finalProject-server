@@ -54,7 +54,7 @@ function handleError(res, reason, message, code) {
     results:<Object or Array>
  }
 */
-app.post('/add',function (req,res) {
+app.post('/comment/add',function (req,res) {
     var comment = req.body;
     comment.timestamp = Date.now();
 
@@ -77,8 +77,13 @@ app.post('/add',function (req,res) {
     });
 })
 
-app.get('/list',function (req,res) {
-    db.collection(COMMENT_COLLECTION).find({}).toArray(function(err, docs) {
+app.get('/comment/list',function (req,res) {
+    var contentId = req.body.contentId;
+    if(!contentId){
+      handleError(res,"Invalid user input","ContentId can not be null",400);
+      return;
+    }
+    db.collection(COMMENT_COLLECTION).find({contentId:contentId}).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get contacts.",500);
     } else {
