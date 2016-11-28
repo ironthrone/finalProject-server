@@ -38,7 +38,7 @@ function handleError(res, reason, message, code) {
   result.status = code;
   result.message = message;
   result.results = null;
-  res.status(code || 500).json(result);
+  res.status(code || 500).json({'response':result});
 }
 
 
@@ -50,7 +50,8 @@ function handleError(res, reason, message, code) {
 	id:<ObjectId>
 	timestamp:<Date>
  }
- return: {
+ return: 
+ response:{
     status:<int>,
     message:<String>,
     results:<Object or Array>
@@ -74,7 +75,7 @@ app.post('/comment/add',function (req,res) {
         if(err){
             handleError(res,err.message,"Fail to create new comment",500);
         }else {
-            res.status(200).json({status:1,message:"Success",result:"Success"});
+            res.status(200).json({'response':{status:1,message:"Success",result:"Success"}});
         }
     });
 })
@@ -89,7 +90,7 @@ app.post('/comment/list',function (req,res) {
     if (err) {
       handleError(res, err.message, "Failed to get contacts.",500);
     } else {
-      res.status(200).json({status:1,message:null,results:docs});
+      res.status(200).json({'response':{status:1,message:null,results:docs}});
     }
   });
 });
