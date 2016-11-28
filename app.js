@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongodb = require('mongodb');
 var path = require('path');
-var fs = results('fs');
+// var fs = require('fs');
 
 var mongoUrl = (process.env.MONGODB_URI || 'mongodb://localhost:27017/mean');
 var port = (process.env.PORT || 5000);
