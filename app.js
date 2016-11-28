@@ -34,11 +34,11 @@ mongodb.MongoClient.connect(mongoUrl,function(err,database){
 
 function handleError(res, reason, message, code) {
   console.log("ERROR: " + reason);
-  var result = {};
-  result.status = code;
-  result.message = message;
-  result.results = null;
-  res.status(code || 500).json({'response':result});
+  var response = {};
+  response.status = code;
+  response.message = message;
+  response.results = null;
+  res.status(code || 500).json({'response':response});
 }
 
 
@@ -75,7 +75,7 @@ app.post('/comment/add',function (req,res) {
         if(err){
             handleError(res,err.message,"Fail to create new comment",500);
         }else {
-            res.status(200).json({'response':{status:1,message:"Success",result:"Success"}});
+            res.status(200).json({'response':{status:1,message:"Success",results:"Success"}});
         }
     });
 })
