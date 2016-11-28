@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongodb = require('mongodb');
 var path = require('path');
+var fs = results('fs');
 
 var mongoUrl = (process.env.MONGODB_URI || 'mongodb://localhost:27017/mean');
 var port = (process.env.PORT || 5000);
@@ -91,4 +92,15 @@ app.post('/comment/list',function (req,res) {
       res.status(200).json({status:1,message:null,results:docs});
     }
   });
+});
+
+app.get('/update',function(req,res){
+    // var latestFile = null;
+    // fs.readdir('resource',function(err,files){
+    //     files.forEach( file => {
+    //         if(latestFile) latestFile = file;
+
+    //     });
+    // })；
+    res.download('resource/app/app.apk');
 });
