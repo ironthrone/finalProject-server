@@ -1,12 +1,13 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongodb = require('mongodb');
-// var path = 
+var path = require('path');
 
 var mongoUrl = (process.env.MONGODB_URI || 'mongodb://localhost:27017/mean');
 var port = (process.env.PORT || 5000);
 
 var app = express();
+app.use(express.static(path.join(__dirname,'resource')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -72,12 +73,12 @@ app.post('/comment/add',function (req,res) {
         if(err){
             handleError(res,err.message,"Fail to create new comment",500);
         }else {
-            res.status(200).json({status:1,message:"Success",result:null});
+            res.status(200).json({status:1,message:"Success",result:"Success"});
         }
     });
 })
 
-app.get('/comment/list',function (req,res) {
+app.post('/comment/list',function (req,res) {
     var contentId = req.body.contentId;
     if(!contentId){
       handleError(res,"Invalid user input","ContentId can not be null",400);
