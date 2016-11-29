@@ -75,7 +75,7 @@ app.post('/comment/add',function (req,res) {
         if(err){
             handleError(res,err.message,"Fail to create new comment",500);
         }else {
-            res.status(200).json({'response':{status:1,message:"Success",results:"Success"}});
+            res.status(200).json({'response':{status:1,message:"Success",results:comment}});
         }
     });
 })
